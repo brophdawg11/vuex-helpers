@@ -4,7 +4,9 @@
   "description": "A collection of vuex-helper methods",
   "author": "mbrophy@urbn.com",
   "license": "MIT",
-  "main": "src/vuex-helpers.js",
+  "main": "dist/vuex-helpers.cjs.js",
+  "module": "src/vuex-helpers.js",
+  "browser": "dist/vuex-helpers.umd.js",
   "files": [
     "src/*.js",
     "LICENSE.md",
@@ -25,9 +27,19 @@
     "vue",
     "vuex"
   ],
+  "files": [
+    "dist",
+    "src",
+    "LICENSE.md",
+    "package.json",
+    "package-lock.json",
+    "README.md"
+  ],
   "scripts": {
+    "build": "rollup -c",
+    "clean": "rm -rf dist/",
     "lint": "eslint .",
-    "publish": "npm run validate",
+    "publish": "npm run validate && npm run build",
     "test": "jest",
     "test:debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand --collectCoverage false",
     "test:watch": "jest --watch",
@@ -35,6 +47,8 @@
   },
   "devDependencies": {
     "@babel/preset-env": "7.8.4",
+    "@rollup/plugin-commonjs": "11.0.2",
+    "@rollup/plugin-node-resolve": "7.1.1",
     "@vue/test-utils": "1.0.0-beta.31",
     "babel-jest": "25.1.0",
     "eslint": "6.8.0",
@@ -43,6 +57,7 @@
     "eslint-plugin-jest": "23.7.0",
     "husky": "4.2.1",
     "jest": "25.1.0",
+    "rollup": "1.31.0",
     "vue": "2.6.11",
     "vue-template-compiler": "2.6.11",
     "vuex": "3.1.2"
