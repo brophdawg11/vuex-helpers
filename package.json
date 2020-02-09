@@ -8,7 +8,8 @@
   "module": "src/vuex-helpers.js",
   "browser": "dist/vuex-helpers.umd.js",
   "files": [
-    "src/*.js",
+    "dist",
+    "src",
     "LICENSE.md",
     "package.json",
     "package-lock.json",
@@ -26,14 +27,6 @@
     "js",
     "vue",
     "vuex"
-  ],
-  "files": [
-    "dist",
-    "src",
-    "LICENSE.md",
-    "package.json",
-    "package-lock.json",
-    "README.md"
   ],
   "scripts": {
     "build": "rollup -c",
