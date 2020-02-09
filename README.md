@@ -17,7 +17,7 @@ This library is a collection of small utility/helper functions to make working w
 
 Install and save the library:
 
-```
+```bash
 npm install --save @urbn/vuex-helpers
 ```
 
@@ -59,7 +59,7 @@ export default {
 
 However, this does not work if you are using dynamically generated namespaces.  Consider using a `product` module for multiple products in an e-commerce application:
 
-```
+```js
 const productModule = {
     namespaced: true,
     state: () => ({
