@@ -33,7 +33,7 @@
     "build": "rollup -c",
     "clean": "rm -rf dist/",
     "lint": "eslint .",
-    "publish": "npm run validate && npm run build",
+    "prepublishOnly": "npm run validate && npm run build",
     "test": "jest",
     "test:debug": "node --inspect-brk ./node_modules/.bin/jest --runInBand --collectCoverage false",
     "test:watch": "jest --watch",
