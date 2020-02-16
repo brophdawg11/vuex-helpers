@@ -1,5 +1,3 @@
-import { mapState } from 'vuex';
-
 function isPlainObject(obj) {
     return Object.prototype.toString.call(obj) === '[object Object]';
 }
@@ -23,24 +21,24 @@ function getModuleState(state, ns) {
  */
 export function mapInstanceState(getNamespace, mappers) {
     if (Array.isArray(mappers)) {
-        return mapState(mappers.reduce((acc, name) => Object.assign(acc, {
+        return mappers.reduce((acc, name) => Object.assign(acc, {
             // Note: Do not use an arrow function as we need to capture `this` at runtime
-            [name](state) {
-                const moduleState = getModuleState(state, getNamespace(this));
+            [name]() {
+                const moduleState = getModuleState(this.$store.state, getNamespace(this));
                 return moduleState[name];
             },
-        }), {}));
+        }), {});
     }
 
     // istanbul ignore else
     if (isPlainObject(mappers)) {
-        return mapState(Object.entries(mappers).reduce((acc, [name, mapper]) => Object.assign(acc, {
+        return Object.entries(mappers).reduce((acc, [name, mapper]) => Object.assign(acc, {
             // Note: Do not use an arrow function as we need to capture `this` at runtime
-            [name](state) {
-                const moduleState = getModuleState(state, getNamespace(this));
+            [name]() {
+                const moduleState = getModuleState(this.$store.state, getNamespace(this));
                 return mapper.call(this, moduleState);
             },
-        }), {}));
+        }), {});
     }
 
     // istanbul ignore next
@@ -63,22 +61,22 @@ export function mapInstanceState(getNamespace, mappers) {
  */
 export function mapInstanceGetters(getNamespace, mappers) {
     if (Array.isArray(mappers)) {
-        return mapState(mappers.reduce((acc, name) => Object.assign(acc, {
+        return mappers.reduce((acc, name) => Object.assign(acc, {
             // Note: Do not use an arrow function as we need to capture `this` at runtime
-            [name](state, getters) {
-                return getters[`${getNamespace(this)}/${name}`];
+            [name]() {
+                return this.$store.getters[`${getNamespace(this)}/${name}`];
             },
-        }), {}));
+        }), {});
     }
 
     // istanbul ignore else
     if (isPlainObject(mappers)) {
-        return mapState(Object.entries(mappers).reduce((acc, [alias, name]) => Object.assign(acc, {
+        return Object.entries(mappers).reduce((acc, [alias, name]) => Object.assign(acc, {
             // Note: Do not use an arrow function as we need to capture `this` at runtime
-            [alias](state, getters) {
-                return getters[`${getNamespace(this)}/${name}`];
+            [alias]() {
+                return this.$store.getters[`${getNamespace(this)}/${name}`];
             },
-        }), {}));
+        }), {});
     }
 
     // istanbul ignore next
