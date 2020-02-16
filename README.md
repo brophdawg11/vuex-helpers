@@ -74,7 +74,7 @@ store.registerModule(`product-${slug1}`, productModule);
 store.registerModule(`product-${slug2}`, productModule);
 ```
 
-Once we've done this, we can no longer leverage the `map*` helpers because we ave no way to make the namespace dynamic.  This is the problem solved by the `mapInstance*` helpers, in that they let you provide a function that takes your component instance as an argument and you can return a dynamic Vuex module namespace.
+Once we've done this, we can no longer leverage the `map*` helpers because we have no way to make the namespace dynamic.  This is the problem solved by the `mapInstance*` helpers, in that they let you provide a function that takes your component instance as an argument and you can return a dynamic Vuex module namespace.
 
 Assume we are rendering components as such:
 
@@ -90,6 +90,7 @@ const getNamespace = cmp => `product-${cmp.slug}`;
 
 export default {
     name: 'MyProduct',
+    props: ['slug'],
     computed: {
         ...mapInstanceState(getNamespace, {
             name: state => state.name,
