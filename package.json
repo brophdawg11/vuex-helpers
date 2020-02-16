@@ -6,7 +6,7 @@
   "license": "MIT",
   "main": "dist/vuex-helpers.cjs.js",
   "module": "src/vuex-helpers.js",
-  "browser": "dist/vuex-helpers.umd.js",
+  "browser": "dist/vuex-helpers.umd.min.js",
   "files": [
     "dist",
     "src",
@@ -52,6 +52,7 @@
     "husky": "4.2.1",
     "jest": "25.1.0",
     "rollup": "1.31.0",
+    "rollup-plugin-terser": "5.2.0",
     "vue": "2.6.11",
     "vue-template-compiler": "2.6.11",
     "vuex": "3.1.2"
