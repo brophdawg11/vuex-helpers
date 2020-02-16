@@ -15,6 +15,7 @@
     "package-lock.json",
     "README.md"
   ],
+  "sideEffects": false,
   "homepage": "https://github.com/brophdawg11/vuex-helpers#readme",
   "repository": {
     "type": "git",
