@@ -36,7 +36,7 @@ export function mapInstanceState(getNamespace, mappers) {
             // Note: Do not use an arrow function as we need to capture `this` at runtime
             [name]() {
                 const moduleState = getModuleState(this.$store.state, getNamespace(this));
-                return mapper.call(this, moduleState);
+                return typeof mapper === 'function' ? mapper.call(this, moduleState) : moduleState[mapper];
             },
         }), {});
     }
