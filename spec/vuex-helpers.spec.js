@@ -21,6 +21,8 @@ describe('Vuex Store Utils', () => {
                 namespaced: true,
                 state: () => ({
                     value: 1,
+                    value2: 2,
+                    value3: 3,
                 }),
             };
 
@@ -32,7 +34,10 @@ describe('Vuex Store Utils', () => {
                     computed: {
                         ...mapInstanceState(getModuleName, ['value']),
                         ...mapInstanceState(getModuleName, {
-                            value2: state => state.value,
+                            value2: state => state.value2,
+                        }),
+                        ...mapInstanceState(getModuleName, {
+                            value3: 'value3',
                         }),
                     },
                     render(h) {
@@ -60,8 +65,10 @@ describe('Vuex Store Utils', () => {
 
                 expect(wrapper.vm.value).toBe(store.state.myNamespace.value);
                 expect(wrapper.vm.value).toBe(1);
-                expect(wrapper.vm.value2).toBe(store.state.myNamespace.value);
-                expect(wrapper.vm.value2).toBe(1);
+                expect(wrapper.vm.value2).toBe(store.state.myNamespace.value2);
+                expect(wrapper.vm.value2).toBe(2);
+                expect(wrapper.vm.value3).toBe(store.state.myNamespace.value3);
+                expect(wrapper.vm.value3).toBe(3);
             });
 
             it('should work for nested modules', () => {
@@ -93,8 +100,10 @@ describe('Vuex Store Utils', () => {
 
                 expect(wrapper.vm.value).toBe(store.state.parent.child.grandchild.value);
                 expect(wrapper.vm.value).toBe(1);
-                expect(wrapper.vm.value2).toBe(store.state.parent.child.grandchild.value);
-                expect(wrapper.vm.value2).toBe(1);
+                expect(wrapper.vm.value2).toBe(store.state.parent.child.grandchild.value2);
+                expect(wrapper.vm.value2).toBe(2);
+                expect(wrapper.vm.value3).toBe(store.state.parent.child.grandchild.value3);
+                expect(wrapper.vm.value3).toBe(3);
             });
 
         });
